@@ -58,7 +58,14 @@
 				});
 
 				console.log(main_menu_list.parentElement.tagName);
-			}
+			},
+			
+			clearPopups: function() {
+				var current_popup_menu = document.getElementById("popup-menu-list");
+				if (current_popup_menu) {
+					current_popup_menu.remove();
+				}
+			},
 			
 		}
 		
