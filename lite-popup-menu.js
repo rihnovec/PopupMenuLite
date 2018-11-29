@@ -1,28 +1,31 @@
 ;(
 	function() {
 		
-		var lpm = {		
-		
-			bindPopup: function(target) {
-				
-				if (typeof target === "string") {
-					var target_list = document.querySelectorAll(target);
-					target_list.forEach(function(item) {
-						lpm.setAction(item);
-					});
-				}
-				else {
-					throw new Error("bind_popup: element with current target is not found");
-				}
-				
-			},
+		var lpm = {
 			
-			setAction: function(id) {
+			mouseX: 0,
+			mouseY: 0,
+			item_width: 200,
+			
+			setAction: function(id, ctx) {
 				id.addEventListener("contextmenu", function(event) {
 					event.preventDefault();
-					console.log("context menu!");
+					lpm.mouseX = event.clientX;
+					lpm.mouseY = event.clientY;
+					
+					lpm.clearPopups();
+					lpm.createPopup.call(this, ctx, lpm.mouseX, lpm.mouseY);
+				});
+			},
+			
+			createPopup: function(items, x_coord, y_coord) {
+				var main_menu_list = document.createElement("ul");
+				
+				items.forEach(function(item) {
+					
 				});
 			}
+			
 		}
 		
 		window.$pm = lpm;
