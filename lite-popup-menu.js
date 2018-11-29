@@ -22,7 +22,39 @@
 				var main_menu_list = document.createElement("ul");
 				
 				items.forEach(function(item) {
+					let menu_item	=	document.createElement("li");
+					menu_item.innerText	=	item.caption;
 					
+					if (item.action === undefined && item.submenu != undefined) {
+						menu_item.addEventListener("mouseover", function() {
+							/* creating submenu */
+							lpm.createPopup.call(this, item.submenu, this.clientWidth, this.offsetY);
+						});
+						
+						menu_item.addEventListener("mouseout", function() {
+							/* creating submenu */
+							var ul_id = document.querySelector("ul");
+							console.log("tagname = " + ul_id.tagName);
+							this.empty();
+							lpm.createPopup.call(this, item.submenu, this.clientWidth, this.offsetY);
+						});
+					}
+					else {
+						if (typeof item.action == "function") {
+							menu_item.addEventListener("click", item.action);
+						}
+					}
+					
+					main_menu_list.setAttribute("id", "popup-menu-list");
+					this.parentElement.insertBefore(main_menu_list, this);
+					main_menu_list.style.left = x_coord + "px";
+					main_menu_list.style.top = y_coord + "px";
+
+					main_menu_list.addEventListener("contextmenu", function(event) {
+						event.preventDefault();
+					});
+
+					console.log(main_menu_list.parentElement.tagName);
 				});
 			}
 			
