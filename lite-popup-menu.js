@@ -45,17 +45,19 @@
 						}
 					}
 					
-					main_menu_list.setAttribute("id", "popup-menu-list");
-					this.parentElement.insertBefore(main_menu_list, this);
-					main_menu_list.style.left = x_coord + "px";
-					main_menu_list.style.top = y_coord + "px";
-
-					main_menu_list.addEventListener("contextmenu", function(event) {
-						event.preventDefault();
-					});
-
-					console.log(main_menu_list.parentElement.tagName);
+					main_menu_list.appendChild(menu_item);
 				});
+				
+				main_menu_list.setAttribute("id", "popup-menu-list");
+				this.parentElement.insertBefore(main_menu_list, this);
+				main_menu_list.style.left = x_coord + "px";
+				main_menu_list.style.top = y_coord + "px";
+
+				main_menu_list.addEventListener("contextmenu", function(event) {
+					event.preventDefault();
+				});
+
+				console.log(main_menu_list.parentElement.tagName);
 			}
 			
 		}
